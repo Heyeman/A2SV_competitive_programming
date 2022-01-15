@@ -9,4 +9,5 @@ for i in range(cmds):
     elif params[0] == "remove":
         s.remove(int(params[1]))
     elif params[0] == "discard":
-        s.discard(i
+        s.discard(int(params[1]))
+print(sum(list(s)))
