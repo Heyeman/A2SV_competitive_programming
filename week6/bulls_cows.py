@@ -1,20 +1,30 @@
 class Solution:
     def getHint(self, secret: str, guess: str) -> str:
-        secrets=list(secret)
-        guesses=list(guess)
-        bulls=0
-        cows=0
-        for i in range(len(guesses)):
-            if guesses[i]==secrets[i]:
-                    bulls+=1
-                    secrets[i]=" "
-                    guesses[i]=" "           
-        for j in range(len(guesses)):
-            if secrets.count(guesses[j])>0 and guesses[j]!=" ":
-                cows+=1
-                for k in range(len(secrets)):
-                    if secrets[k]==guesses[j]:
-                        secrets[k]=" "
-                        break
-        return str(bulls)+'A'+str(cows)+'B'
+        i = b = c = 0
+        l = len(secret)
+        secret = list(secret)
+        guess = list(guess)
+        while i < l:
+            if secret[i] == guess[i]:
+                b += 1
+                secret.pop(i)
+                guess.pop(i)
+                l -= 1
+            else:
+                i += 1
+        i = 0
+        #print(guess, secret)
+        while i < l:
+            if guess[i] in secret:
+                ind = secret.index(guess[i])
+                guess[i] = 'x'
+                secret[ind] = 'x'
+                c += 1
+                #print(secret, guess)
+                
+            i+=1
+                
+            
+            
         
+        return "{}A{}B".format(b,c)
