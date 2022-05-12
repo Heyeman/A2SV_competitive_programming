@@ -27,7 +27,7 @@ class Solution:
             
             
         
-        visited = set()
+       
         l1, l2 = [], []
         l1  = bfs(p)
         l2 = bfs(q)
