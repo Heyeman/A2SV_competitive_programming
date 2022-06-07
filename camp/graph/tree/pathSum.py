@@ -6,17 +6,16 @@
 #         self.right = right
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
-        self.res = False
-        def levelOrder(node, lvlSum):
+        def dfs(node, num):
             if not node:
-                return 0
-            curr = lvlSum + node.val
+                return False
+            left = right = False
+            curr = num + node.val
             if node.left:
-                levelOrder(node.left, curr)
+                left = dfs(node.left, curr)
             if node.right:
-                levelOrder(node.right, curr)
-            if not node.left and not node.right and not self.res:
-                self.res = curr == targetSum
-        levelOrder(root, 0)
-        return self.res
-                
+                right = dfs(node.right, curr)
+            if not node.left and not node.right:
+                return targetSum == curr
+            return left or right
+        return dfs(root, 0)
